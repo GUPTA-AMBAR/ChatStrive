@@ -2,13 +2,12 @@
   "name": "full-chat-applicaton-begginer",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "backend/server.js",
   "type": "module",
   "scripts": {
     "dev": "nodemon backend/server.js",
-    "start" :"node backend/server.js",
-    "build" : "npm install && npm install --prefix frontend && npm run build --prefix frontend"
-
+    "start": "node backend/server.js",
+    "build": "npm install && npm install --prefix frontend && npm run build --prefix frontend"
   },
   "keywords": [],
   "author": "",
