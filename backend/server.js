@@ -1,3 +1,4 @@
+import path from "path";
 import express from 'express';
 import dotenv from 'dotenv';
 import { router as authRoutes } from './routes/auth.routes.js';
@@ -6,6 +7,7 @@ import { router as userRoutes } from './routes/user.routes.js';
 import connectToDatabase from './db/connectToDatabase.js';
 import cookieParser from 'cookie-parser';
 import { app ,server} from './socket.io/socket.js';
+
 
 dotenv.config();
 console.log();
@@ -19,10 +21,17 @@ app.use(cookieParser());
 // Connect to database
 connectToDatabase();
 
+const __dirname = path.resolve();
 // Route handling
 app.use('/api/auth', authRoutes); // Authentication routes
 app.use('/api/messages', messageRoutes); // Message routes
 app.use('/api/user', userRoutes); // User routes
+
+app.use(express.static(path.join(__dirname ,"/fronted/dist")))
+
+app.get("*" ,(req,res)=>{
+  res.sendFile(path.join(__dirname ,"frontend", "dist", "index.html"));
+})
 
 // Server
 server.listen(PORT, () => {
